@@ -1,0 +1,12 @@
+=== GLOBAL SOLUTION 2026.2 ===
+Disciplina: Cross-Platform Application Development
+Desafio: Territory Predictive Insights
+
+Integrante 1: Bento Donato Garcia | RM: 561621
+Integrante 2: Enzo Ribeiro Domingues Piazentin | RM: 564216
+Integrante 3: Guilherme Domingues Califoni | RM: 565157
+
+GitHub: [PREENCHER_COM_LINK_DO_REPOSITORIO_PUBLICO]
+Vídeo: [PREENCHER_COM_LINK_DO_VIDEO_PUBLICO]
+
+ATENÇÃO: NÃO SUBMETER ESTE ARQUIVO. Execute scripts/gerar_entrega.py depois de publicar os links válidos.
