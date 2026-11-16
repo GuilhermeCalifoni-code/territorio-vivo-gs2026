@@ -22,11 +22,14 @@ Future<void> main() async {
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
-  final consent = ref.watch(appProvider.select((state) => state.consent));
+  // Um único GoRouter; mudanças de consentimento apenas reavaliam o redirect.
+  final consent = ValueNotifier<bool>(ref.read(appProvider).consent);
+  ref.listen<bool>(appProvider.select((state) => state.consent), (_, next) => consent.value = next);
   final router = GoRouter(
+    refreshListenable: consent,
     redirect: (context, state) {
       final onConsentPage = state.matchedLocation == '/consent';
-      if (!consent) return onConsentPage ? null : '/consent';
+      if (!consent.value) return onConsentPage ? null : '/consent';
       return onConsentPage ? '/overview' : null;
     },
     initialLocation: '/overview',
@@ -47,7 +50,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       ]),
     ],
   );
-  ref.onDispose(router.dispose);
+  ref.onDispose(() {
+    router.dispose();
+    consent.dispose();
+  });
   return router;
 });
 

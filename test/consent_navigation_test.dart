@@ -47,8 +47,8 @@ void main() {
 
     expect(find.byType(ConsentScreen), findsOneWidget);
     await _acceptConsent(tester);
-    expect(find.text('São Paulo em perspectiva'), findsOneWidget);
     expect(prefs.getBool('consent_v1'), true);
+    expect(find.text('São Paulo em perspectiva'), findsOneWidget);
 
     await tester.tap(find.byTooltip('Configurações'));
     await tester.pumpAndSettle();
