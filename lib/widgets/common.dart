@@ -59,16 +59,20 @@ class SurfacePanel extends StatelessWidget {
   final Widget child;
   final EdgeInsets padding;
   @override
-  Widget build(BuildContext context) => Container(
-    width: double.infinity,
-    padding: padding,
-    decoration: BoxDecoration(
-      color: Theme.of(context).colorScheme.surface,
-      borderRadius: BorderRadius.circular(20),
-      border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: .18)),
-    ),
-    child: child,
-  );
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    // Material (e não Container decorado) para que ListTile, SwitchListTile e
+    // InkWell dentro do painel desenhem fundo e efeito de toque corretamente.
+    return Material(
+      color: scheme.surface,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(color: scheme.outline.withValues(alpha: .18)),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: SizedBox(width: double.infinity, child: Padding(padding: padding, child: child)),
+    );
+  }
 }
 
 class MetricCard extends StatelessWidget {
