@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:territorio_vivo/data/app_controller.dart';
 import 'package:territorio_vivo/data/weather_api.dart';
+import 'package:territorio_vivo/features/consent/consent_screen.dart';
 import 'package:territorio_vivo/main.dart';
 import 'package:territorio_vivo/models/territory_models.dart';
 
@@ -13,6 +14,20 @@ class _OfflineWeatherApi extends WeatherApi {
   Future<WeatherSnapshot> fetch() async => WeatherSnapshot.demonstration(
         DateTime(2026, 11, 15, 12),
       );
+}
+
+/// A tela de consentimento é uma ListView longa: em telas pequenas o botão
+/// fica fora da área visível e não é construído. Rola até cada elemento.
+Future<void> _acceptConsent(WidgetTester tester) async {
+  final list = find.byType(Scrollable).first;
+  final checkbox = find.byType(CheckboxListTile);
+  await tester.scrollUntilVisible(checkbox, 120, scrollable: list);
+  await tester.tap(checkbox);
+  await tester.pump();
+  final enter = find.text('Entrar no painel');
+  await tester.scrollUntilVisible(enter, 120, scrollable: list);
+  await tester.tap(enter);
+  await tester.pumpAndSettle();
 }
 
 void main() {
@@ -30,13 +45,8 @@ void main() {
     ));
     await tester.pumpAndSettle();
 
-    expect(find.text('Entrar no painel'), findsOneWidget);
-    await tester.ensureVisible(find.byType(CheckboxListTile).first);
-    await tester.tap(find.byType(CheckboxListTile).first);
-    await tester.pump();
-    await tester.ensureVisible(find.text('Entrar no painel'));
-    await tester.tap(find.text('Entrar no painel'));
-    await tester.pumpAndSettle();
+    expect(find.byType(ConsentScreen), findsOneWidget);
+    await _acceptConsent(tester);
     expect(find.text('São Paulo em perspectiva'), findsOneWidget);
     expect(prefs.getBool('consent_v1'), true);
 
@@ -56,15 +66,10 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Revogar'));
     await tester.pumpAndSettle();
-    expect(find.text('Entrar no painel'), findsOneWidget);
+    expect(find.byType(ConsentScreen), findsOneWidget);
     expect(prefs.getBool('consent_v1'), false);
 
-    await tester.ensureVisible(find.byType(CheckboxListTile).first);
-    await tester.tap(find.byType(CheckboxListTile).first);
-    await tester.pump();
-    await tester.ensureVisible(find.text('Entrar no painel'));
-    await tester.tap(find.text('Entrar no painel'));
-    await tester.pumpAndSettle();
+    await _acceptConsent(tester);
     expect(find.text('São Paulo em perspectiva'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
