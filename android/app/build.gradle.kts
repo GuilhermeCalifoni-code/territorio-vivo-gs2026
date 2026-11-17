@@ -1,6 +1,6 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    // O Flutter Gradle Plugin deve ser aplicado depois dos plugins Android/Kotlin.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
@@ -13,9 +13,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
+
     defaultConfig {
         applicationId = "br.fiap.territoriovivo"
         minSdk = 24
@@ -23,6 +21,7 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
+
     buildTypes {
         release {
             // Para demonstração local. Para distribuição real, use uma chave privada.
@@ -30,6 +29,13 @@ android {
         }
     }
 }
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+    }
+}
+
 flutter {
     source = "../.."
 }
