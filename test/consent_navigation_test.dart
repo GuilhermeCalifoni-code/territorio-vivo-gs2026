@@ -22,10 +22,14 @@ Future<void> _acceptConsent(WidgetTester tester) async {
   final list = find.byType(Scrollable).first;
   final checkbox = find.byType(CheckboxListTile);
   await tester.scrollUntilVisible(checkbox, 120, scrollable: list);
+  await tester.ensureVisible(checkbox);
+  await tester.pumpAndSettle();
   await tester.tap(checkbox);
   await tester.pump();
   final enter = find.text('Entrar no painel');
   await tester.scrollUntilVisible(enter, 120, scrollable: list);
+  await tester.ensureVisible(enter);
+  await tester.pumpAndSettle();
   await tester.tap(enter);
   await tester.pumpAndSettle();
 }
