@@ -60,12 +60,14 @@ void main() {
     await tester.enterText(find.byType(TextFormField).at(0), '200');
     await tester.enterText(find.byType(TextFormField).at(1), '50');
     await tester.ensureVisible(find.text('Salvar limites'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Salvar limites'));
     await tester.pumpAndSettle();
     expect(prefs.getDouble('rain_mm'), 200);
     expect(prefs.getDouble('heat_c'), 50);
 
     await tester.ensureVisible(find.text('Revogar consentimento e limpar dados'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Revogar consentimento e limpar dados'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Revogar'));
