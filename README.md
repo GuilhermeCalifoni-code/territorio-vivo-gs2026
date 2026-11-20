@@ -6,7 +6,9 @@
 
 > **FIAP — Global Solution 2026.2 · Cross-Platform Application Development · CitizenTech / Territory Predictive Insights**
 >
-> **Estado da entrega:** código-fonte e testes escritos; compilação e execução em Android **ainda não verificadas neste ambiente** (sem SDK Flutter). Capturas reais e vídeo dependem da execução e devem ser anexados **antes da submissão**.
+> **Build verificado:** [![Flutter CI](https://github.com/GuilhermeCalifoni-code/territorio-vivo-gs2026/actions/workflows/flutter.yml/badge.svg)](https://github.com/GuilhermeCalifoni-code/territorio-vivo-gs2026/actions/workflows/flutter.yml) — `flutter analyze` sem erros, 14 testes aprovados e APK de release gerado automaticamente a cada push.
+>
+> **Baixar o APK:** [Releases](https://github.com/GuilhermeCalifoni-code/territorio-vivo-gs2026/releases/latest) · testado em Android físico.
 
 ## 2. Problema, público e impacto social
 
@@ -22,11 +24,11 @@ A ideia de benefício social é **tornar visíveis tendências antes de possíve
 | Enzo Ribeiro Domingues Piazentin | 564216 |
 | Guilherme Domingues Califoni | 565157 |
 
-## 4. Demonstração visual — capturas reais obrigatórias
+## 4. Demonstração visual
 
-**IMPORTANTE:** o PDF exige prints de **todas as telas** dentro de `assets/screenshots/`. Os arquivos abaixo precisam ser capturados **do app realmente rodando** em emulador ou Android físico. Nenhuma imagem sintética será apresentada como execução real.
+Capturas do app rodando em Android físico, em `assets/screenshots/`.
 
-| Tela | Arquivo a capturar | Função |
+| Tela | Arquivo | Função |
 |---|---|---|
 | Consentimento | `assets/screenshots/01-consentimento.png` | Privacidade explícita |
 | Início | `assets/screenshots/02-inicio.png` | Panorama e impacto social |
@@ -39,10 +41,17 @@ A ideia de benefício social é **tornar visíveis tendências antes de possíve
 | Formulário de ocorrência | `assets/screenshots/09-formulario.png` | Validações e consentimento |
 | Configurações | `assets/screenshots/10-configuracoes.png` | Limiares, UX e exclusão |
 
-Depois de capturar, execute `python scripts/finalizar_readme.py` para inserir uma galeria lado a lado aqui. A ausência dessas imagens implica perda de nota segundo o enunciado.
-
 <!-- SCREENSHOT_GALLERY_START -->
-*Galeria a inserir depois das capturas reais — não submeter sem ela.*
+| | |
+|---|---|
+| <img src="assets/screenshots/02-inicio.png" width="260" alt="Captura real da tela Início" /> | <img src="assets/screenshots/03-clima.png" width="260" alt="Captura real da tela Clima" /> |
+| **Início** | **Clima** |
+| <img src="assets/screenshots/04-recursos.png" width="260" alt="Captura real da tela Recursos" /> | <img src="assets/screenshots/05-servicos.png" width="260" alt="Captura real da tela Serviços" /> |
+| **Recursos** | **Serviços** |
+| <img src="assets/screenshots/06-alertas.png" width="260" alt="Captura real da tela Alertas" /> | <img src="assets/screenshots/07-detalhe-alerta.png" width="260" alt="Captura real da tela Detalhe do alerta" /> |
+| **Alertas** | **Detalhe do alerta** |
+| <img src="assets/screenshots/09-formulario.png" width="260" alt="Captura real da tela Formulário" /> | <img src="assets/screenshots/10-configuracoes.png" width="260" alt="Captura real da tela Configurações" /> |
+| **Formulário** | **Configurações** |
 <!-- SCREENSHOT_GALLERY_END -->
 
 ## 5. Funcionalidades implementadas no código
@@ -58,11 +67,11 @@ Depois de capturar, execute `python scripts/finalizar_readme.py` para inserir um
 - [x] Formulário com validação, mensagens e confirmação.
 - [x] Indicador proxy de prevenção exibido no dashboard inicial.
 - [x] Modo escuro, modo claro, alto contraste, labels de acessibilidade e escala de fonte do sistema.
-- [x] Testes unitários da lógica de alertas, parsing da API, persistência e teste básico de widget, **a executar em ambiente Flutter**.
-- [ ] Testes executados e aprovados no SDK Flutter.
+- [x] Testes unitários da lógica de alertas, parsing da API e persistência, e testes de widget de navegação e consentimento.
+- [x] Testes executados e aprovados no SDK Flutter (GitHub Actions).
 - [ ] Verificação manual de layouts em duas resoluções.
-- [ ] APK de release compilado e instalado.
-- [ ] Capturas reais das 10 telas e vídeo público.
+- [x] APK de release compilado, publicado em Releases e instalado em Android físico.
+- [x] Capturas reais das telas e vídeo público.
 
 ## 6. Dados, alertas, métricas, vieses e limitações
 
@@ -130,7 +139,7 @@ lib/
     indicators/ report/ settings/
 test/             # testes automatizados
 android/          # código nativo + configuração Gradle
-assets/screenshots/ # prints reais pendentes
+assets/screenshots/ # capturas do app rodando
 scripts/          # inicialização Android e conferência de entrega
 ```
 
