@@ -1,4 +1,6 @@
-# 1. Território Vivo · Inteligência territorial para São Paulo
+# 1. Território Vivo — Urban Intelligence & Monitoring
+
+> Flutter · Explainable alerts, offline functionality, automated builds and tests · FIAP team project.
 
 <img src="assets/logo.png" alt="Logotipo Território Vivo: linhas de monitoramento em azul e verde" width="88" />
 
